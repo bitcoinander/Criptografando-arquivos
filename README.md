@@ -3,7 +3,7 @@ Criptografando arquivos com Python. Utilizando o módulo hashlib.
 
 # code 
 
-```
+```python
 
 import hashlib
 import os
