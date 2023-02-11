@@ -1,17 +1,19 @@
 import hashlib
 import os
 
-dir = "/home/ander/Documentos/tools/"
+dir_path = "/home/ander/Documentos/tools/"
 
-for files in os.listdir(dir):
-    os.chdir(dir)
-    with open(files, 'rb') as rb:
-        dados=rb.read()
-        cripto = hashlib.sha512(dados).hexdigest()
-        new= '(criptografado) ' + os.path.basename(files)
-        with open (new, 'wb') as novo:
-            novo.write(cripto*0xFF)
-            novo.close()
-            rb.close()
+for file_name in os.listdir(dir_path):
+    file_path = os.path.join(dir_path, file_name)
 
-            os.remove(files)
+    with open(file_path, 'rb') as file:
+        file_data = file.read()
+        encrypted_data = hashlib.sha512(file_data).hexdigest().encode()
+
+        new_file_name = "(criptografado) " + file_name
+        new_file_path = os.path.join(dir_path, new_file_name)
+
+        with open(new_file_path, 'wb') as new_file:
+            new_file.write(encrypted_data)
+
+    os.remove(file_path)
